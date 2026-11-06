@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Рынок доставки воды: Грозный и Чечня</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #22A3FE;
+  --blue: #2B66F0;
+  --deep: #1B31CA;
+  --night: #070B1F;
+  --ice: #EAF5FF;
+  --fog: #93A8D0;
+  --spark: #FFC83D;
+  --white: #FFFFFF;
+  --ink2: rgba(7, 11, 31, .68);
+  --line: rgba(7, 11, 31, .12);
+  --head: "Unbounded", "Manrope", system-ui, sans-serif;
+  --text: "Manrope", system-ui, sans-serif;
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font: 400 16px/1.5 var(--text);
+  color: var(--night);
+  background-color: var(--blue);
+  background-image:
+    radial-gradient(rgba(255,255,255,.16) 1.5px, transparent 1.6px),
+    linear-gradient(135deg, var(--sky), var(--blue) 45%, var(--deep));
+  background-size: 22px 22px, 100% 100%;
+  background-attachment: fixed;
+}
+main { padding: 32px 16px 48px; }
+.slide {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto 36px;
+  padding: clamp(22px, 4.5vw, 52px);
+  background: var(--white);
+  border: 3px solid var(--night);
+  border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--night);
+  overflow: hidden;
+}
+.slide.dark { background: var(--night); color: var(--white); box-shadow: 8px 8px 0 var(--deep); }
+.num {
+  position: absolute; top: clamp(18px, 3vw, 30px); right: clamp(18px, 3vw, 34px);
+  font: 800 13px/1 var(--head); letter-spacing: .08em;
+  padding: 7px 11px; border: 2px solid currentColor; border-radius: 999px; opacity: .55;
+}
+.kicker { font: 800 13px/1.3 var(--text); letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin: 0 0 10px; padding-right: 64px; }
+.dark .kicker { color: var(--sky); }
+h1, h2 { font-family: var(--head); font-weight: 800; letter-spacing: -.01em; margin: 0 0 14px; padding-right: 56px; }
+h1 { font-size: clamp(30px, 6.4vw, 64px); line-height: 1.05; }
+h2 { font-size: clamp(24px, 4.4vw, 42px); line-height: 1.1; }
+h3 { font: 800 19px/1.25 var(--text); margin: 0 0 8px; }
+.lead { font-size: clamp(16px, 2.1vw, 20px); color: var(--ink2); margin: 0 0 26px; max-width: 760px; }
+.dark .lead { color: var(--fog); }
+.hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin: 28px 0 8px; }
+.hero b { font: 800 clamp(64px, 15vw, 150px)/.95 var(--head); color: var(--spark); letter-spacing: -.03em; }
+.hero span { font: 600 clamp(17px, 2.4vw, 22px)/1.35 var(--text); color: var(--white); max-width: 420px; }
+.minis { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 30px; }
+.mini { border: 2px solid rgba(255,255,255,.22); border-radius: 18px; padding: 16px 18px; }
+.mini b { display: block; font: 800 clamp(24px, 3.6vw, 34px)/1.1 var(--head); color: var(--white); margin-bottom: 6px; }
+.mini span { color: var(--fog); font-size: 15px; }
+
+.bars { display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: minmax(110px, 220px) 1fr; gap: 6px 16px; align-items: center; }
+.bar-label { font-weight: 800; font-size: clamp(15px, 1.9vw, 18px); }
+.bar-label small { display: block; font-weight: 400; font-size: 13px; color: var(--ink2); }
+.bar-track { position: relative; height: 44px; }
+.bar-fill { height: 100%; width: 0; min-width: 6px; background: var(--blue); border-radius: 0 10px 10px 0; transition: width 1.1s var(--spring); }
+.bar-val { position: absolute; top: 50%; transform: translateY(-50%); font: 800 clamp(16px, 2.2vw, 22px)/1 var(--head); white-space: nowrap; padding-left: 10px; transition: left 1.1s var(--spring); }
+.bar-row.hi .bar-fill { background: var(--deep); }
+.bar-row.lo .bar-fill { background: var(--fog); }
+@media (max-width: 560px) { .bar-row { grid-template-columns: 1fr; } .bar-track { height: 34px; } }
+
+.note { margin-top: 24px; padding: 16px 18px; border-radius: 16px; background: var(--ice); border: 2px solid var(--night); font-size: clamp(15px, 1.8vw, 17px); }
+.note b { font-weight: 800; }
+.note.warn { background: #FFF6D9; }
+.dark .note { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.3); color: var(--white); }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.box { border: 2px solid var(--night); border-radius: 18px; padding: 18px; background: var(--white); }
+.box .sum { font-size: 14px; color: var(--ink2); margin: 0 0 14px; }
+.box.ice { background: var(--ice); }
+.stat { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.stat b { font: 800 clamp(30px, 4.6vw, 44px)/1 var(--head); color: var(--blue); }
+.stat span { color: var(--ink2); font-size: 15px; }
+
+/* доли: телефон и компьютер */
+.split { display: flex; height: 64px; border: 3px solid var(--night); border-radius: 18px; overflow: hidden; margin: 10px 0 14px; }
+.split div { display: flex; align-items: center; justify-content: center; font: 800 clamp(15px, 2.4vw, 22px)/1 var(--head); color: var(--white); white-space: nowrap; overflow: hidden; }
+.split .a { background: var(--blue); }
+.split .b { background: var(--night); }
+.split .c { background: var(--fog); color: var(--night); }
+.leg { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--ink2); }
+.leg i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; margin-right: 6px; vertical-align: -2px; }
+
+/* столбики по месяцам */
+.cols-wrap { position: relative; }
+.cols { display: flex; align-items: flex-end; gap: 3px; height: 170px; padding-top: 22px; border-bottom: 2px solid var(--night); }
+.col { position: relative; flex: 1; height: 100%; display: flex; align-items: flex-end; cursor: pointer; }
+.col i { display: block; width: 100%; height: 0; background: var(--sky); border-radius: 4px 4px 0 0; transition: height .9s var(--spring); }
+.col.y2 i { background: var(--blue); }
+.col.peak i { background: var(--deep); }
+.col em { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(var(--h) + 4px); font: 800 11px/1 var(--text); font-style: normal; white-space: nowrap; color: var(--night); background: var(--white); padding: 2px 3px; border-radius: 4px; z-index: 1; }
+.col:hover i, .col.on i { outline: 2px solid var(--night); outline-offset: 1px; }
+.axis { display: flex; gap: 3px; margin-top: 6px; }
+.axis span { flex: 1; font-size: 10.5px; color: var(--ink2); text-align: center; white-space: nowrap; overflow: visible; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink2); margin: 0 0 18px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.tip { position: fixed; z-index: 10; pointer-events: none; opacity: 0; background: var(--night); color: var(--white); font: 600 14px/1.3 var(--text); padding: 8px 11px; border-radius: 10px; transform: translate(-50%, -110%); transition: opacity .15s; white-space: nowrap; }
+.tip.show { opacity: 1; }
+
+.phr { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.phr li { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; font-size: 15px; padding-bottom: 7px; border-bottom: 1px dashed var(--line); }
+.phr li b { font: 800 15px/1 var(--head); color: var(--blue); }
+.phr li.x span { text-decoration: line-through; color: var(--ink2); }
+.phr li.x b { color: var(--fog); }
+
+.tbl-wrap { overflow-x: auto; margin: 0 -4px; padding: 0 4px; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+th { text-align: left; font: 800 12px/1.2 var(--text); letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); padding: 0 8px 10px; border-bottom: 2px solid var(--night); }
+th.r, td.r { text-align: right; }
+td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.kw { font-weight: 800; }
+td.kw small { display: block; font-weight: 400; font-size: 12.5px; color: var(--ink2); }
+td a { color: var(--blue); font-weight: 800; word-break: break-all; }
+.tag { display: inline-block; font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 999px; border: 2px solid var(--night); background: var(--ice); margin: 0 4px 4px 0; white-space: nowrap; }
+.tag.no { background: var(--white); color: var(--ink2); border-color: var(--fog); }
+.tag.yes { background: var(--spark); }
+
+.idx { display: grid; gap: 12px; }
+.idx-row { display: grid; grid-template-columns: minmax(110px, 200px) 1fr; gap: 6px 16px; align-items: center; }
+.idx-row .bar-label { font-size: 16px; }
+.idx-track { position: relative; height: 40px; background: var(--ice); border-radius: 10px; }
+.idx-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--blue); border-radius: 10px; transition: width 1.1s var(--spring); }
+.idx-row.hi .idx-fill { background: var(--deep); }
+.idx-avg { position: absolute; top: -6px; bottom: -6px; width: 3px; background: var(--night); border-radius: 2px; }
+.idx-val { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font: 800 18px/1 var(--head); }
+@media (max-width: 560px) { .idx-row { grid-template-columns: 1fr; } }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.card { border: 2px solid var(--night); border-radius: 20px; padding: 20px; background: var(--white); display: flex; flex-direction: column; gap: 10px; }
+.card.top { background: var(--ice); }
+.card .meta { font-size: 14px; color: var(--ink2); }
+.card ul { margin: 0; padding-left: 18px; font-size: 15px; display: grid; gap: 4px; }
+.card .plus b { color: var(--blue); }
+.card .minus b { color: #B4232F; }
+.score { display: flex; align-items: center; gap: 10px; }
+.score .dots { display: flex; gap: 4px; }
+.score .dots i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--night); background: var(--white); }
+.score .dots i.on { background: var(--blue); }
+.score span { font: 800 14px/1 var(--head); }
+
+/* расчёт */
+.calc { display: grid; gap: 18px; }
+.ctrl { display: grid; grid-template-columns: minmax(150px, 260px) 1fr; gap: 8px 16px; align-items: center; }
+.ctrl label { font-weight: 800; font-size: 16px; }
+.ctrl label small { display: block; font-weight: 400; color: var(--ink2); font-size: 13px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button { min-width: 64px; min-height: 48px; padding: 0 14px; font: 800 16px/1 var(--head); color: var(--night); background: var(--white); border: 2px solid var(--night); border-radius: 14px; cursor: pointer; }
+.seg button.on { background: var(--blue); color: var(--white); }
+.seg button:focus-visible { outline: 3px solid var(--spark); outline-offset: 2px; }
+@media (max-width: 560px) { .ctrl { grid-template-columns: 1fr; } }
+.res { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 6px; }
+.res .box b { display: block; font: 800 clamp(28px, 4.4vw, 40px)/1.05 var(--head); color: var(--blue); margin-bottom: 6px; }
+.res .box.main { background: var(--night); color: var(--white); }
+.res .box.main b { color: var(--spark); }
+.res .box.main span { color: var(--fog); }
+.scen { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.scen .box b { display: block; font: 800 clamp(26px, 4vw, 36px)/1.05 var(--head); color: var(--blue); margin: 6px 0; }
+
+.out { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; }
+.out li { border: 2px solid var(--night); border-radius: 18px; padding: 18px 18px 18px 64px; position: relative; background: var(--white); font-size: 16px; }
+.out li::before { content: attr(data-n); position: absolute; left: 16px; top: 16px; width: 34px; height: 34px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; font: 800 15px/1 var(--head); }
+.out li b { display: block; font-size: 17px; margin-bottom: 4px; }
+.how { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 16px; }
+.how a, .note a { color: var(--blue); font-weight: 800; word-break: break-word; }
+footer { text-align: center; color: rgba(255,255,255,.85); font-size: 13px; padding: 4px 16px 0; }
+
+.slide { opacity: 0; transform: translateY(26px) scale(.985); transition: opacity .5s ease, transform .8s var(--spring); }
+.slide.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .slide, .bar-fill, .bar-val, .col i, .idx-fill { transition: none !important; }
+  .slide { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<main id="deck"></main>
+<footer>Анализ рынка доставки питьевой воды · Грозный и Чеченская Республика · ноябрь 2026</footer>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+// ===== Данные =====
+// Яндекс Вордстат, Чеченская Республика (регион 11024) и Грозный (1106), собрано 6 ноября 2026.
+const MONTHS = ["ноябрь 2024","декабрь 2024","январь 2025","февраль 2025","март 2025","апрель 2025","май 2025","июнь 2025","июль 2025","август 2025","сентябрь 2025","октябрь 2025","ноябрь 2025","декабрь 2025","январь 2026","февраль 2026","март 2026","апрель 2026","май 2026","июнь 2026","июль 2026","август 2026","сентябрь 2026"];
+const SER = {
+  "доставка воды": [75,99,89,87,134,91,109,154,172,152,131,283,253,632,191,185,82,99,86,80,200,154,108],
+  "вода 19 л": [66,129,81,75,85,139,121,84,71,85,131,191,195,193,136,118,90,172,198,105,101,83,136],
+  "кулер для воды": [76,132,69,116,95,116,103,227,208,185,126,146,69,108,83,60,69,108,107,128,214,149,184]
+};
+// Ядро спроса: среднее в месяц за 12 месяцев (октябрь 2025 - сентябрь 2026), Чечня, все устройства
+const CORE = [
+  {label: "доставка воды", sub: "и «доставка воды грозный», «услуги доставки воды»", value: 196, hi: true},
+  {label: "вода 19 л", sub: "«вода 19 литров», «вода 19 купить»", value: 143},
+  {label: "кулер для воды", sub: "покупка и ремонт кулера", value: 119},
+  {label: "бутилированная вода", value: 43},
+  {label: "артезианская вода", value: 41},
+  {label: "заказать воду", value: 31},
+  {label: "родниковая вода", value: 29},
+  {label: "помпа для воды", sub: "ручной насос на бутыль", value: 25},
+  {label: "бутыль 19 л", value: 15}
+];
+// Последние 30 дней, по устройствам: [компьютер, телефон, планшет, всего, Грозный]
+const DEV = [
+  ["доставка воды", 14, 70, 2, 86, 62],
+  ["вода 19 л", 10, 83, 0, 94, 50],
+  ["кулер для воды", 16, 123, 0, 140, 82],
+  ["бутилированная вода", 12, 17, 0, 30, 17],
+  ["родниковая вода", 3, 35, 0, 39, 29],
+  ["помпа для воды", 0, 20, 0, 20, 14],
+  ["заказать воду", 1, 16, 0, 17, 11],
+  ["артезианская вода", 2, 12, 0, 14, 8],
+  ["бутыль 19 л", 0, 8, 0, 8, 8]
+];
+// Индекс интереса за 30 дней: 100 = как в среднем по России
+const IDX = {
+  "доставка воды": [["Дагестан",107],["Ингушетия",70],["Кабардино-Балкария",39],["Северная Осетия",30],["Грозный",33],["Чечня",25]],
+  "кулер для воды": [["Кабардино-Балкария",162],["Дагестан",106],["Грозный",103],["Чечня",96],["Ингушетия",81],["Северная Осетия",75]]
+};
+const ABS = [["Дагестан", 1484, "3,2 млн"], ["Кабардино-Балкария", 217, "0,9 млн"], ["Северная Осетия", 147, "0,7 млн"], ["Ингушетия", 113, "0,5 млн"], ["Чечня", 102, "1,55 млн"]];
+</script>
+<script id="companies">
+// Компании Грозного. Карты, выдача и Instagram проверены в Chrome 6 ноября 2026.
+// ym: Яндекс Карты [оценка, число оценок]; g2: 2ГИС; gm: Google Карты; yP/gP: место в выдаче Яндекса и Google по «доставка воды грозный»
+const COMP = [
+  {name: "Баракат", firm: "ООО «БАРАКАТ»", site: "vodabarakat.ru", ym: [4.9, 82], g2: [5, 5], gm: [4.9, 52], yP: 2, gP: 8, inst: "", app: false,
+   price: "380 ₽ «вода, начитанная Кораном»", where: "Грозный, филиал в Аргуне",
+   plus: ["Лучший рейтинг и больше всего оценок на Яндекс Картах", "Второе место в Яндексе", "Два филиала: Грозный и Аргун"],
+   minus: ["В Google Картах стоит в категории «Доставка готовой еды»", "В Google только 8-е место"]},
+  {name: "Родники Кавказа", firm: "", site: "rodnikikavkaza24.ru", ym: [4.8, 44], g2: [4.2, 7], gm: [4.4, 27], yP: 1, gP: 0, inst: "", app: true,
+   price: "250-255 ₽ («Горная вершина», «Пилигрим»)", where: "Грозный, видна и по Гудермесу",
+   plus: ["Первое место в Яндексе", "Интернет-магазин с ценами и приложение для заказа", "Видна в Яндексе и по Гудермесу"],
+   minus: ["По «доставка воды грозный» в Google виден только через 2ГИС", "В 2ГИС оценка 4,2"]},
+  {name: "Vodaway", firm: "", site: "", ym: [4.7, 34], g2: [4.7, 9], gm: null, yP: 0, gP: 7, inst: "@voda_way · 5,8 тыс.", app: true,
+   price: "нет на картах", where: "Грозный",
+   plus: ["Самый большой Instagram среди компаний воды: 5 839 подписчиков", "Своё приложение в App Store", "Хороший рейтинг на Яндекс Картах"],
+   minus: ["Нет на первой странице Яндекса", "В выдаче нет своего сайта, только Instagram и приложение"]},
+  {name: "Aqua Grozny", firm: "", site: "aquagrozny.ru", ym: [4.7, 24], g2: [3.3, 5], gm: [4.2, 15], yP: 8, gP: 3, inst: "@aqua_grozny · больше 3 тыс.", app: false,
+   price: "210-310 ₽ (Алан-Су, Эльбруссия, Пилигрим)", where: "Грозный",
+   plus: ["Второе и третье места в Google (Instagram и сайт)", "Цены открыто выложены в 2ГИС", "Есть объявления на Авито"],
+   minus: ["Худший рейтинг в 2ГИС: 3,3", "В Яндексе только 8-е место"]},
+  {name: "Mainspring", firm: "", site: "mainspringwater.ru", ym: [4.4, 8], g2: [5, 2], gm: null, yP: 0, gP: 1, inst: "", app: false,
+   price: "350 ₽ за талую воду, доставка бесплатно", where: "Грозный",
+   plus: ["Первое место в Google по обоим запросам", "Понятное предложение: одна цена, доставка в день заказа"],
+   minus: ["Мало отзывов на картах: 8 и 2", "Нет на первой странице Яндекса"]},
+  {name: "Aqualinq", firm: "", site: "aqualinq.ru", ym: null, g2: null, gm: null, yP: 4, gP: 0, inst: "", app: false,
+   price: "нет данных", where: "Грозный и Чечня",
+   plus: ["Четвёртое место в Яндексе", "Пишет, что возит по всей Чечне"],
+   minus: ["Нет в списках Яндекс Карт и 2ГИС по запросу «доставка воды»"]},
+  {name: "Нихалой", firm: "", site: "", ym: null, g2: [5, 5], gm: null, yP: 0, gP: 0, inst: "", app: false,
+   price: "нет данных", where: "Грозный",
+   plus: ["Название ищут в Яндексе: «нихалой вода», «вода нихалой в грозном номер телефона»"],
+   minus: ["Нет сайта на первой странице Яндекса и Google", "Нет в списке Яндекс Карт по запросу «доставка воды»"]},
+  {name: "Чеченские минеральные воды", firm: "ООО «Чеченские минеральные воды», Серноводское", site: "chmw.bitrix24shop.ru", ym: [4.9, 49], g2: [5, 1], gm: null, yP: 6, gP: 0, inst: "", app: false,
+   price: "вода 0,5 л и 5 л", where: "Завод, доставка по Грозному",
+   plus: ["Свой завод в Серноводском", "Магазин в Яндексе: 4,7 и 95 отзывов", "Карточка 4,9 (49) видна по Гудермесу"],
+   minus: ["Не про 19 л: больше про бутылки 0,5 и 5 л"]}
+];
+const OTHERS = "Ещё видны: ЭкоДом (2ГИС 5,0, 4 оценки), Aquamarin и склад «Питьевая вода» (2ГИС, без оценок), сеть водоматов «Живая вода» (Яндекс Карты 4,6, 26 оценок, круглосуточно), tiktak-delivery.ru (продаёт «Пилигрим»), Instagram @voda19l_v_groznom (больше 330 подписчиков), продавцы на Авито. Справочник Spravker насчитывает 17 компаний доставки воды в Грозном.";
+const PRICES = [
+  ["Алан-Су 19 л", 210, "Aqua Grozny, 2ГИС"],
+  ["Горная вершина 19 л", 250, "Родники Кавказа, Яндекс Карты"],
+  ["Алан-Су 19 л", 250, "tiktak-delivery.ru"],
+  ["Пилигрим 19 л", 255, "Родники Кавказа, сайт"],
+  ["Эльбруссия 19 л", 260, "Aqua Grozny, 2ГИС"],
+  ["Пилигрим 19 л", 280, "Aqua Grozny, 2ГИС"],
+  ["Пилигрим Premium 19 л", 310, "Aqua Grozny, 2ГИС"],
+  ["Талая вода 19 л", 350, "Mainspring, сайт"],
+  ["Пилигрим 19 л", 350, "tiktak-delivery.ru"],
+  ["Вода, начитанная Кораном, 19 л", 380, "Баракат, Яндекс Карты"]
+];
+const PRICE = 260;
+const PRICE_OPTS = [200, 230, 260, 300, 350];
+</script>
+<script>
+// ===== Помощники =====
+const fmt = n => Math.round(n).toLocaleString("ru-RU");
+const sum = a => a.reduce((s, x) => s + x, 0);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"})[c]);
+const RU_MON = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+let slideNo = 0;
+function slide(html, cls = "") {
+  slideNo++;
+  return `<section class="slide ${cls}"><span class="num">${String(slideNo).padStart(2, "0")}</span>${html}</section>`;
+}
+function bars(items, scale = 82) {
+  const max = Math.max(...items.map(i => i.value));
+  return `<div class="bars">${items.map(i => `
+    <div class="bar-row ${i.hi ? "hi" : ""} ${i.lo ? "lo" : ""}">
+      <div class="bar-label">${esc(i.label)}${i.sub ? `<small>${esc(i.sub)}</small>` : ""}</div>
+      <div class="bar-track"><div class="bar-fill" data-w="${(i.value / max * scale).toFixed(2)}"></div><span class="bar-val" data-w="${(i.value / max * scale).toFixed(2)}" style="left:0">${i.text || fmt(i.value)}</span></div>
+    </div>`).join("")}</div>`;
+}
+function columns(key) {
+  const a = SER[key];
+  const max = Math.max(...a);
+  const peakI = a.indexOf(max);
+  const cols = a.map((v, i) => {
+    const h = (v / max * 100).toFixed(1) + "%";
+    const cls = ["col", i >= 11 ? "y2" : "", i === peakI ? "peak" : ""].join(" ");
+    const lab = i === peakI ? `<em>${fmt(v)}</em>` : "";
+    return `<div class="${cls}" style="--h:${h}" data-h="${h}" data-tip="${esc(MONTHS[i])}: ${fmt(v)}" aria-label="${esc(MONTHS[i])}: ${fmt(v)}" tabindex="0"><i></i>${lab}</div>`;
+  }).join("");
+  const axis = MONTHS.map((m, i) => {
+    const [name, y] = m.split(" ");
+    const mi = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"].indexOf(name);
+    return `<span>${i % 3 === 0 ? RU_MON[mi] + " " + y.slice(2) : ""}</span>`;
+  }).join("");
+  return `<div class="cols-wrap"><div class="cols">${cols}</div><div class="axis">${axis}</div></div>`;
+}
+function idxRows(list) {
+  const max = Math.max(110, ...list.map(x => x[1]));
+  return `<div class="idx">${list.map(([n, v]) => `
+    <div class="idx-row ${n === "Чечня" || n === "Грозный" ? "hi" : ""}">
+      <div class="bar-label">${esc(n)}</div>
+      <div class="idx-track"><div class="idx-fill" data-w="${(v / max * 100).toFixed(1)}"></div><div class="idx-avg" style="left:${(100 / max * 100).toFixed(1)}%"></div><span class="idx-val">${v}</span></div>
+    </div>`).join("")}</div>`;
+}
+
+// ===== Расчёты =====
+const coreMonth = sum(CORE.map(c => c.value));
+const devD = sum(DEV.map(d => d[1])), devP = sum(DEV.map(d => d[2])), devT = sum(DEV.map(d => d[3]));
+const devAll = devD + devP + devT;
+const phonePct = Math.round(devP / devAll * 100);
+const deskPct = Math.round(devD / devAll * 100);
+const grPct = Math.round(sum(DEV.map(d => d[5])) / sum(DEV.map(d => d[4])) * 100);
+const yearSum = (k, from, to) => sum(SER[k].slice(from, to));
+// ноябрь 2025 - сентябрь 2026 (индексы 12-22) против ноября 2024 - сентября 2025 (0-10)
+const grow = (k) => Math.round((yearSum(k, 12, 23) / yearSum(k, 0, 11) - 1) * 100);
+// то же без декабрей (индексы 1 и 13)
+const growNoDec = (k) => Math.round(((yearSum(k, 12, 23) - SER[k][13]) / (yearSum(k, 0, 11) - SER[k][1]) - 1) * 100);
+const GOOGLE = 0.545;  // доля Google в России, LiveInternet, ноябрь 2026
+const totalSearch = Math.round(coreMonth / (1 - GOOGLE) / 50) * 50;
+
+const S = [];
+</script>
+<script id="slides">
+// ===== 1. Обложка =====
+S.push(slide(`
+  <p class="kicker">Анализ рынка · ноябрь 2026</p>
+  <h1>Доставка питьевой воды: Грозный и Чечня</h1>
+  <p class="lead">Сколько людей ищут воду в интернете, с каких устройств, какие компании работают, кто лучше продвигается и сколько денег в этом рынке.</p>
+  <div class="hero"><b>~${fmt(coreMonth)}</b><span>запросов в месяц в Яндексе о покупке и доставке воды по Чечне</span></div>
+  <div class="minis">
+    <div class="mini"><b>${phonePct}%</b><span>ищут с телефона, ${deskPct}% с компьютера</span></div>
+    <div class="mini"><b>${grPct}%</b><span>запросов приходят из Грозного</span></div>
+    <div class="mini"><b>~${fmt(totalSearch)}</b><span>запросов в месяц вместе с Google (оценка)</span></div>
+    <div class="mini" id="heroMarket"><b>см. 14</b><span>объём рынка в рублях: расчёт ниже</span></div>
+  </div>`, "dark"));
+
+// ===== 2. Что ищут =====
+S.push(slide(`
+  <p class="kicker">Спрос в Яндексе</p>
+  <h2>Что пишут в поиске</h2>
+  <p class="lead">Среднее число запросов в месяц за последний год (октябрь 2025 - сентябрь 2026), вся Чечня, все устройства.</p>
+  ${bars(CORE)}
+  <div class="note">Всего около <b>${fmt(coreMonth)} запросов в месяц</b>, или <b>${fmt(coreMonth * 12)} в год</b>. Это люди, которые прямо сейчас ищут воду, бутыль, кулер или помпу. Главная фраза: «доставка воды», на втором месте «вода 19 л».</div>`));
+
+// ===== 3. Точные фразы =====
+S.push(slide(`
+  <p class="kicker">Спрос в Яндексе</p>
+  <h2>Точные фразы и мусор</h2>
+  <p class="lead">Запросы за последние 30 дней по Чечне. Слева то, что ищут покупатели. Справа похожие фразы, которые к воде не относятся: на них рекламу не настраивать.</p>
+  <div class="grid3">
+    <div class="box"><h3>Ищут покупатели</h3><ul class="phr">
+      <li><span>доставка воды грозный</span><b>32</b></li>
+      <li><span>услуги доставки воды</span><b>9</b></li>
+      <li><span>доставка питьевой воды</span><b>5</b></li>
+      <li><span>вода пилигрим доставка</span><b>5</b></li>
+      <li><span>доставка воды 19 л</span><b>4</b></li>
+      <li><span>вода 19 литров купить</span><b>4</b></li>
+      <li><span>купить воду 19</span><b>4</b></li>
+      <li><span>вода жемчужина кавказа 19 литров</span><b>3</b></li>
+      <li><span>вода нихалой в грозном номер телефона</span><b>8</b></li>
+      <li><span>вода зам зам инстаграм грозный</span><b>8</b></li>
+    </ul></div>
+    <div class="box"><h3>Похоже, но не то</h3><ul class="phr">
+      <li class="x"><span>«вода на дом»: это «дом на воде»</span><b>124</b></li>
+      <li class="x"><span>«вода Грозный»: это «Минеральные Воды - Грозный»</span><b>224</b></li>
+      <li class="x"><span>«вода Гудермес»: это поезд до Минвод</span><b>11</b></li>
+      <li class="x"><span>«кулер»: чаще кулер для компьютера</span><b>865</b></li>
+      <li class="x"><span>«вода 5 литров»: «5 литров воды сколько кг»</span><b>127</b></li>
+    </ul></div>
+    <div class="box ice"><h3>Бренды воды</h3><ul class="phr">
+      <li><span>пилигрим вода</span><b>38</b></li>
+      <li><span>нихалой вода</span><b>14</b></li>
+      <li><span>аквамаркет</span><b>5</b></li>
+    </ul><p class="sum" style="margin:12px 0 0">Название своей воды люди ищут редко. Бренд пока не работает как реклама: покупатель ищет «доставку», а не марку.</p></div>
+  </div>`));
+
+// ===== 4. Устройства =====
+S.push(slide(`
+  <p class="kicker">Телефон или компьютер</p>
+  <h2>${phonePct}% ищут с телефона</h2>
+  <p class="lead">Все запросы о воде за последние 30 дней по Чечне, разделённые по устройствам.</p>
+  <div class="split" role="img" aria-label="Телефоны ${phonePct}%, компьютеры ${deskPct}%">
+    <div class="a" style="width:${phonePct}%">${phonePct}%</div>
+    <div class="b" style="width:${100 - phonePct}%">${deskPct}%</div>
+  </div>
+  <div class="leg"><span><i style="background:var(--blue)"></i>телефоны</span><span><i style="background:var(--night)"></i>компьютеры</span><span>планшеты: меньше 1%</span></div>
+  <div class="tbl-wrap" style="margin-top:22px"><table>
+    <thead><tr><th>Запрос</th><th class="r">Телефон</th><th class="r">Компьютер</th><th class="r">Доля телефона</th></tr></thead>
+    <tbody>${DEV.map(d => `<tr><td class="kw">${esc(d[0])}</td><td class="r">${d[2]}</td><td class="r">${d[1]}</td><td class="r"><b>${Math.round(d[2] / (d[1] + d[2] + d[3]) * 100)}%</b></td></tr>`).join("")}</tbody>
+  </table></div>
+  <div class="note"><b>Что это значит.</b> Сайт, карточка на картах и кнопка заказа должны быть удобны с телефона: крупная кнопка «Заказать в WhatsApp», звонок одним нажатием. Исключение: «бутилированная вода», там 41% с компьютера. Так ищут офисы и магазины.</div>`));
+
+// ===== 5. Грозный =====
+S.push(slide(`
+  <p class="kicker">География</p>
+  <h2>${grPct}% спроса в Грозном</h2>
+  <p class="lead">В Грозном живёт около 400 тысяч человек: это четверть республики. Но запросов о воде оттуда больше половины.</p>
+  ${bars([
+    {label: "Грозный", value: grPct, text: grPct + "% запросов", hi: true},
+    {label: "Остальная Чечня", value: 100 - grPct, text: (100 - grPct) + "% запросов"},
+    {label: "Доля жителей Грозного", sub: "399 тыс. из 1,55 млн", value: 26, text: "26% жителей", lo: true}
+  ])}
+  <div class="note"><b>Что это значит.</b> Главный рынок доставки сейчас в Грозном. В сёлах и малых городах многие пьют воду из скважин и родников (это наше предположение, не проверено). Гудермеса, Аргуна, Шали и Урус-Мартана нет среди частых запросов о доставке воды.</div>`));
+
+// ===== 6. Соседи =====
+S.push(slide(`
+  <p class="kicker">Сравнение с соседями</p>
+  <h2>Чечня ищет доставку в 4 раза реже соседей</h2>
+  <p class="lead">Индекс интереса Яндекса: 100 значит «как в среднем по России». Ниже 100: тему ищут реже.</p>
+  <div class="grid3">
+    <div class="box"><h3>«доставка воды»</h3><p class="sum">Чёрная черта: средний уровень России</p>${idxRows(IDX["доставка воды"])}</div>
+    <div class="box"><h3>«кулер для воды»</h3><p class="sum">Кулер ищут почти как в среднем по России</p>${idxRows(IDX["кулер для воды"])}</div>
+  </div>
+  <div class="tbl-wrap" style="margin-top:22px"><table>
+    <thead><tr><th>Республика</th><th class="r">Жителей</th><th class="r">«доставка воды» за 30 дней</th></tr></thead>
+    <tbody>${ABS.map(a => `<tr><td class="kw">${a[0]}</td><td class="r">${a[2]}</td><td class="r"><b>${fmt(a[1])}</b></td></tr>`).join("")}</tbody>
+  </table></div>
+  <div class="note"><b>Главный вывод.</b> Кулер для воды в Чечне ищут почти так же, как в среднем по России (индекс 96). А доставку в Яндексе ищут в 4 раза реже (индекс 25). Значит, воду заказывают, но не через поиск: по WhatsApp, через знакомых, в Instagram, по номеру на бутыли. Рынок в интернете молодой. Кто первым займёт поиск и карты, получит покупателей дёшево.</div>`));
+
+// ===== 7. Время года =====
+S.push(slide(`
+  <p class="kicker">Динамика</p>
+  <h2>Спрос растёт</h2>
+  <p class="lead">Запросы по месяцам, Чечня. Нажмите на столбик, чтобы увидеть число.</p>
+  <div class="legend"><span><i style="background:var(--sky)"></i>ноябрь 2024 - сентябрь 2025</span><span><i style="background:var(--blue)"></i>октябрь 2025 - сентябрь 2026</span><span><i style="background:var(--deep)"></i>пик</span></div>
+  <div class="grid3">
+    <div class="box"><h3>«доставка воды»</h3><p class="sum">За 11 месяцев: +${grow("доставка воды")}% к прошлому году, без всплеска в декабре +${growNoDec("доставка воды")}%</p>${columns("доставка воды")}</div>
+    <div class="box"><h3>«вода 19 л»</h3><p class="sum">За 11 месяцев: +${grow("вода 19 л")}% к прошлому году</p>${columns("вода 19 л")}</div>
+    <div class="box"><h3>«кулер для воды»</h3><p class="sum">Пик летом: июль, август</p>${columns("кулер для воды")}</div>
+  </div>
+  <div class="note"><b>Что видно.</b> Запросы о доставке и о воде 19 л за год выросли. Летом спрос выше: жара, кулеры покупают в июне-августе. В декабре 2025 был резкий всплеск «доставки воды» (632 запроса). Причину мы не проверяли: это могли быть перебои с водой в городе.</div>`));
+
+// ===== 8. Яндекс и Google =====
+S.push(slide(`
+  <p class="kicker">Где ищут</p>
+  <h2>Яндекс, Google и карты</h2>
+  <p class="lead">Точные цифры даёт только Яндекс (Вордстат). Google свои цифры по регионам открыто не показывает.</p>
+  <div class="grid3">
+    <div class="box"><div class="stat"><b>45%</b><span>поиска в России идёт через Яндекс</span></div><p class="sum">LiveInternet, ноябрь 2026, вся Россия</p></div>
+    <div class="box"><div class="stat"><b>55%</b><span>через Google</span></div><p class="sum">На Android-телефонах Google стоит сразу. В Чечне его доля, скорее всего, ещё выше</p></div>
+    <div class="box ice"><div class="stat"><b>~${fmt(totalSearch)}</b><span>запросов в месяц всего</span></div><p class="sum">Оценка: ${fmt(coreMonth)} из Яндекса, делённые на его долю 45%</p></div>
+  </div>
+  <div class="note"><b>Чего нет в этих цифрах.</b> Поиск прямо в 2ГИС и Яндекс Картах («вода рядом»), в Instagram и в WhatsApp-группах. Для доставки воды это важные каналы: человек открывает карту и звонит тому, кто выше и с лучшими отзывами.</div>`));
+
+// ===== Компании =====
+const rate = r => r ? `<b>${String(r[0]).replace(".", ",")}</b> <small>(${r[1]})</small>` : `<span style="color:var(--fog)">нет</span>`;
+const pos = p => p ? `<b>${p}</b>` : `<span style="color:var(--fog)">нет</span>`;
+// Сила продвижения: 6 признаков
+const SIG = [
+  ["сайт", c => !!c.site],
+  ["топ-3 Яндекса", c => c.yP && c.yP <= 3],
+  ["топ-3 Google", c => c.gP && c.gP <= 3],
+  ["30+ оценок на картах", c => (c.ym && c.ym[1] >= 30) || (c.gm && c.gm[1] >= 30)],
+  ["Instagram 3 тыс.+", c => !!c.inst],
+  ["приложение", c => c.app]
+];
+const score = c => SIG.filter(s => s[1](c)).length;
+const RANK = COMP.filter(c => !c.firm.includes("Серноводское")).slice().sort((a, b) => score(b) - score(a) || ((b.ym || [0, 0])[1] - (a.ym || [0, 0])[1]));
+
+S.push(slide(`
+  <p class="kicker">Конкуренты</p>
+  <h2>Кто возит воду в Грозном</h2>
+  <p class="lead">Компании, которые видны в Яндексе, Google, на Яндекс Картах и в 2ГИС. Оценки и места проверены 6 ноября 2026.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Компания</th><th class="r">Яндекс Карты</th><th class="r">2ГИС</th><th class="r">Google Карты</th><th class="r">Место в Яндексе</th><th class="r">Место в Google</th></tr></thead>
+    <tbody>${COMP.map(c => `<tr><td class="kw">${esc(c.name)}<small>${esc(c.site || c.inst || c.where)}</small></td><td class="r">${rate(c.ym)}</td><td class="r">${rate(c.g2)}</td><td class="r">${rate(c.gm)}</td><td class="r">${pos(c.yP)}</td><td class="r">${pos(c.gP)}</td></tr>`).join("")}</tbody>
+  </table></div>
+  <p class="sum" style="margin-top:10px;color:var(--ink2);font-size:14px">В скобках число оценок. Место в выдаче по запросу «доставка воды грозный», «нет» значит не на первой странице.</p>
+  <div class="note">${OTHERS}</div>`));
+
+S.push(slide(`
+  <p class="kicker">Продвижение в интернете</p>
+  <h2>У кого продвижение сильнее</h2>
+  <p class="lead">Считаем 6 признаков: свой сайт, первые три места в Яндексе, первые три места в Google, 30 и больше оценок на картах, Instagram от 3 тысяч, своё приложение.</p>
+  <div class="cards">${RANK.map((c, i) => `
+    <div class="card ${i < 2 ? "top" : ""}">
+      <h3>${i + 1}. ${esc(c.name)}</h3>
+      <div class="score"><div class="dots">${SIG.map(s => `<i class="${s[1](c) ? "on" : ""}" title="${s[0]}"></i>`).join("")}</div><span>${score(c)} из 6</span></div>
+      <div>${SIG.map(s => `<span class="tag ${s[1](c) ? "yes" : "no"}">${s[0]}</span>`).join("")}</div>
+      <ul class="plus">${c.plus.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+      <ul class="minus">${c.minus.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+    </div>`).join("")}</div>
+  <div class="note"><b>Кто с кем конкурирует.</b> В Яндексе борются Родники Кавказа и Баракат. В Google впереди Mainspring и Aqua Grozny. На Яндекс Картах лидирует Баракат. В Instagram лидирует Vodaway. Ни у кого нет первых мест сразу везде: рынок ещё не поделён.</div>`));
+
+S.push(slide(`
+  <p class="kicker">Реклама</p>
+  <h2>Рекламу воды никто не покупает</h2>
+  <p class="lead">Мы проверили рекламные места по запросам «доставка воды грозный» и «доставка воды гудермес».</p>
+  <div class="grid3">
+    <div class="box"><h3>Яндекс Директ</h3><p class="sum" style="margin:0">Рекламные места в выдаче заняли чужие темы: сервисы ИИ, франшиза суши, Яндекс Браузер. Ни одной компании воды.</p></div>
+    <div class="box"><h3>2ГИС</h3><p class="sum" style="margin:0">В списке «доставка воды» реклама только сервиса кешбэка. Платного места у компаний воды нет.</p></div>
+    <div class="box ice"><h3>Что это значит</h3><p class="sum" style="margin:0">Первая компания, которая включит рекламу по «доставка воды грозный», сразу встанет выше всех. Конкурентов за клик нет, значит клик будет дешёвым.</p></div>
+  </div>
+  <div class="note warn">Реклама меняется каждый час. Это снимок одного дня, 6 ноября 2026. Перед запуском проверьте ещё раз.</div>`));
+
+S.push(slide(`
+  <p class="kicker">Цены</p>
+  <h2>Сколько стоит бутыль 19 л</h2>
+  <p class="lead">Открытые цены компаний Грозного: сайты, Яндекс Карты, 2ГИС. Без залога за бутыль.</p>
+  ${bars(PRICES.map(p => ({label: p[0], sub: p[2], value: p[1], text: p[1] + " ₽", hi: p[1] >= 350})), 78)}
+  <div class="note">Обычная цена: <b>250-280 ₽</b>. Дешевле всех Алан-Су за 210 ₽. Дороже 300 ₽ продают особую воду: талую, «Premium», начитанную Кораном. Значит, люди готовы платить больше за воду с историей. В расчёте рынка берём ${PRICE} ₽.</div>`));
+
+S.push(slide(`
+  <p class="kicker">За пределами Грозного</p>
+  <h2>Гудермес, Аргун и сёла: свободное место</h2>
+  <p class="lead">Что показывают Яндекс и карты по запросу «доставка воды гудермес».</p>
+  <div class="grid3">
+    <div class="box"><h3>Нет местного лидера</h3><p class="sum" style="margin:0">В Яндексе сверху Авито, Яндекс Услуги и компании из Грозного. Справочник Spravker знает в Гудермесе только 2 компании доставки воды.</p></div>
+    <div class="box"><h3>На картах соседи</h3><p class="sum" style="margin:0">В блоке карт рядом с Родниками Кавказа стоят компании из Махачкалы: «Талая Капля» (5,0, 43 отзыва) и «Вода Гор».</p></div>
+    <div class="box ice"><h3>Аргун</h3><p class="sum" style="margin:0">Филиал в Аргуне есть у «Бараката» (2ГИС). Других компаний доставки с адресом в Аргуне мы не нашли.</p></div>
+  </div>
+  <div class="note"><b>Что это значит.</b> Кто первым сделает карточки на картах с адресом в Гудермесе, Аргуне, Шали и наберёт отзывы, получит эти города почти без борьбы.</div>`));
+</script>
+<script id="slides-market">
+// ===== Объём рынка =====
+// Жители: Росстат. Чечня 1 552 866 на 1.01.2024, Грозный 399 286 на 1.01.2025.
+// Человек в семье: 5 (оценка, точной цифры переписи 2021 по Чечне мы не нашли).
+const HH = {gr: Math.round(399286 / 5), rest: Math.round((1552866 - 399286) / 5)};
+const OPT = {
+  grShare: [5, 10, 15, 20, 25],
+  restShare: [2, 4, 6, 8],
+  bottles: [3, 4, 5, 6, 8],
+  price: PRICE_OPTS
+};
+const SCEN = [
+  {name: "Осторожно", gr: 10, rest: 2, b: 4},
+  {name: "Средне", gr: 15, rest: 4, b: 5},
+  {name: "Смело", gr: 20, rest: 6, b: 6}
+];
+const B2B = 0.15;  // офисы, кафе, магазины, мечети: +15% к домам (оценка)
+function market(gr, rest, b, price) {
+  const bottles = (HH.gr * gr / 100 + HH.rest * rest / 100) * b * (1 + B2B);
+  return {bottles, month: bottles * price, year: bottles * price * 12};
+}
+const mln = r => (r / 1e6).toLocaleString("ru-RU", {maximumFractionDigits: r < 1e8 ? 1 : 0}) + " млн ₽";
+const midYear = market(SCEN[1].gr, SCEN[1].rest, SCEN[1].b, PRICE).year;
+const lowYear = market(SCEN[0].gr, SCEN[0].rest, SCEN[0].b, PRICE).year;
+const highYear = market(SCEN[2].gr, SCEN[2].rest, SCEN[2].b, PRICE).year;
+const seg = (key, vals, cur, unit) => `<div class="seg" data-k="${key}">${vals.map(v => `<button type="button" class="${v === cur ? "on" : ""}" data-v="${v}" aria-pressed="${v === cur}">${v}${unit}</button>`).join("")}</div>`;
+
+S.push(slide(`
+  <p class="kicker">Объём рынка</p>
+  <h2>Сколько денег в доставке воды</h2>
+  <p class="lead">Точных данных о продажах воды по Чечне в открытом доступе нет. Поэтому считаем от числа семей. Цифры ниже: оценка, не факт.</p>
+  <div class="scen">${SCEN.map(s => { const m = market(s.gr, s.rest, s.b, PRICE); return `<div class="box ${s.name === "Средне" ? "ice" : ""}"><h3>${s.name}</h3><b>${mln(m.year)}</b><p class="sum" style="margin:0">в год · ${fmt(m.bottles)} бутылей в месяц<br>Грозный ${s.gr}% семей, сёла ${s.rest}%, по ${s.b} бутылей в месяц</p></div>`; }).join("")}</div>
+  <div class="note"><b>Как считали.</b> В Грозном около ${fmt(HH.gr)} семей, в остальной Чечне около ${fmt(HH.rest)} (жители по Росстату, делённые на 5 человек в семье). Часть семей заказывает воду 19 л. Каждая берёт несколько бутылей в месяц по цене ${PRICE} ₽. Сверху +15% на офисы, кафе и магазины.</div>`));
+
+S.push(slide(`
+  <p class="kicker">Объём рынка</p>
+  <h2>Посчитайте со своими цифрами</h2>
+  <p class="lead">Нажимайте кнопки. Вы лучше знаете, сколько бутылей берёт средний клиент и какая доля семей уже пьёт привозную воду.</p>
+  <div class="calc">
+    <div class="ctrl"><label>Грозный<small>какая доля семей заказывает воду</small></label>${seg("gr", OPT.grShare, 15, "%")}</div>
+    <div class="ctrl"><label>Остальная Чечня<small>доля семей в сёлах и городах</small></label>${seg("rest", OPT.restShare, 4, "%")}</div>
+    <div class="ctrl"><label>Бутылей в месяц<small>на одну семью</small></label>${seg("b", OPT.bottles, 5, "")}</div>
+    <div class="ctrl"><label>Цена бутыля 19 л<small>в рублях, без залога за тару</small></label>${seg("price", OPT.price, PRICE, " ₽")}</div>
+    <div class="res" id="calcRes"></div>
+  </div>`));
+
+// ===== Выводы =====
+S.push(slide(`
+  <p class="kicker">Итог</p>
+  <h2>Выводы</h2>
+  <ol class="out">
+    <li data-n="1"><b>Покупатели есть, поиск пустой</b>Кулер для воды в Чечне ищут как в среднем по России, а доставку в 4 раза реже. Воду заказывают через знакомых и WhatsApp. Интернет-рынок только начинается.</li>
+    <li data-n="2"><b>Всё для телефона</b>${phonePct}% запросов с телефона. Карточка на картах, сайт и кнопка «Заказать в WhatsApp» должны работать одним нажатием.</li>
+    <li data-n="3"><b>Карты решают</b>Человек открывает карту и звонит тому, у кого выше рейтинг. Лидер Баракат: 82 оценки на Яндекс Картах. У остальных 8-44. Догнать можно за несколько месяцев просьб об отзыве.</li>
+    <li data-n="4"><b>Реклама свободна</b>По «доставка воды грозный» компании воды не дают рекламу ни в Яндексе, ни в 2ГИС. Первый рекламодатель встанет выше всех.</li>
+    <li data-n="5"><b>Яндекс и Google разные</b>В Яндексе впереди Родники Кавказа и Баракат, в Google Mainspring и Aqua Grozny. Больше половины поиска идёт через Google: его нельзя забывать.</li>
+    <li data-n="6"><b>Города вокруг свободны</b>В Гудермесе и Аргуне нет сильного местного игрока. По Гудермесу на картах видны компании из Махачкалы. Шали и Урус-Мартан мы отдельно не проверяли.</li>
+    <li data-n="7"><b>Особая вода дороже</b>Обычная бутыль 250-280 ₽. Талая и «начитанная Кораном» вода продаётся за 350-380 ₽. История воды поднимает цену.</li>
+    <li data-n="8"><b>Спрос растёт, пик летом</b>Запросы о доставке и о воде 19 л за год выросли. Кулеры ищут больше всего в июне-июле: к лету нужны запас бутылей и курьеры.</li>
+    <li data-n="9"><b>Офисы ищут с компьютера</b>«Бутилированную воду» 41% ищут с компьютера. Офисам, школам и кафе нужно своё предложение: договор, счёт, график доставки.</li>
+  </ol>`));
+
+// ===== Как считали =====
+S.push(slide(`
+  <p class="kicker">Источники</p>
+  <h2>Как собирали данные</h2>
+  <ul class="how">
+    <li><b>Спрос:</b> Яндекс Вордстат, регионы «Чеченская Республика» и «Грозный», 31 запрос. Число запросов за последние 30 дней на 6 ноября 2026, отдельно телефоны, компьютеры и планшеты. По месяцам: ноябрь 2024 - сентябрь 2026.</li>
+    <li><b>Индекс интереса:</b> Вордстат, 100 значит «как в среднем по России».</li>
+    <li><b>Выдача и реклама:</b> Яндекс и Google, регион Грозный, 6 ноября 2026. Запросы «доставка воды грозный», «вода 19 литров грозный», «доставка воды гудермес».</li>
+    <li><b>Карты:</b> Яндекс Карты, 2ГИС, Google Карты, запрос «доставка воды», Грозный, 6 ноября 2026.</li>
+    <li><b>Жители:</b> Росстат. Чечня: 1 552 866 человек на 1 января 2024. Грозный: 399 286 на 1 января 2025 (<a href="https://citypopulation.de/en/russia/northerncaucasus/admin/%C4%8De%C4%8Denija/96701__groznyj/" target="_blank" rel="noopener">citypopulation.de</a> по данным Росстата).</li>
+    <li><b>Доля поисковиков:</b> <a href="https://www.liveinternet.ru/stat/ru/searches.html?period=month" target="_blank" rel="noopener">LiveInternet</a>, ноябрь 2026, вся Россия: Google 54,5%, Яндекс 45,3%. По Чечне отдельных данных нет.</li>
+  </ul>
+  <div class="note warn"><b>Что не проверено.</b> Объём рынка в рублях: оценка, а не данные продаж. Размер семьи (5 человек) и доля семей, которые заказывают воду: наши допущения. Число запросов в Google: оценка по доле Google в России. Поиск внутри Instagram, WhatsApp и 2ГИС никто не публикует, его в цифрах нет.</div>`));
+</script>
+<script>
+document.getElementById("deck").innerHTML = S.join("");
+
+// Калькулятор рынка
+const CUR = {gr: 15, rest: 4, b: 5, price: PRICE};
+function drawCalc() {
+  const m = market(CUR.gr, CUR.rest, CUR.b, CUR.price);
+  document.getElementById("calcRes").innerHTML = `
+    <div class="box"><b>${fmt(m.bottles)}</b><span>бутылей в месяц по Чечне</span></div>
+    <div class="box"><b>${mln(m.month)}</b><span>в месяц</span></div>
+    <div class="box main"><b>${mln(m.year)}</b><span>в год: объём рынка</span></div>`;
+}
+document.querySelectorAll(".seg").forEach(g => g.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  CUR[g.dataset.k] = Number(b.dataset.v);
+  g.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
+  drawCalc();
+}));
+drawCalc();
+const hm = document.getElementById("heroMarket");
+if (hm) hm.innerHTML = `<b>${mln(lowYear).replace(" млн ₽", "")}-${mln(highYear)}</b><span>в год: объём рынка (оценка, средне ${mln(midYear)})</span>`;
+
+function grow2(el) {
+  el.querySelectorAll(".bar-fill").forEach(b => b.style.width = b.dataset.w + "%");
+  el.querySelectorAll(".bar-val").forEach(b => b.style.left = b.dataset.w + "%");
+  el.querySelectorAll(".col").forEach(c => c.querySelector("i").style.height = c.dataset.h);
+  el.querySelectorAll(".idx-fill").forEach(b => b.style.width = b.dataset.w + "%");
+}
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); grow2(e.target); io.unobserve(e.target); }
+  }), {threshold: .08});
+  document.querySelectorAll(".slide").forEach(s => io.observe(s));
+} else {
+  document.querySelectorAll(".slide").forEach(s => { s.classList.add("in"); grow2(s); });
+}
+
+const tip = document.getElementById("tip");
+let active = null;
+function showTip(col) {
+  const r = col.getBoundingClientRect();
+  tip.textContent = col.dataset.tip;
+  tip.style.left = Math.min(Math.max(r.left + r.width / 2, 90), window.innerWidth - 90) + "px";
+  tip.style.top = (r.bottom - col.querySelector("i").offsetHeight) + "px";
+  tip.classList.add("show");
+  if (active) active.classList.remove("on");
+  active = col; col.classList.add("on");
+}
+function hideTip() { tip.classList.remove("show"); if (active) active.classList.remove("on"); active = null; }
+document.addEventListener("pointerover", e => { const c = e.target.closest(".col"); if (c && e.pointerType === "mouse") showTip(c); });
+document.addEventListener("pointerout", e => { const c = e.target.closest(".col"); if (c && e.pointerType === "mouse") hideTip(); });
+document.addEventListener("click", e => { const c = e.target.closest(".col"); if (c) { c === active ? hideTip() : showTip(c); } else hideTip(); });
+document.addEventListener("focusin", e => { const c = e.target.closest(".col"); if (c) showTip(c); });
+window.addEventListener("scroll", hideTip, {passive: true});
+</script>
+</body>
+</html>
