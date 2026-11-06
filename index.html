@@ -319,7 +319,7 @@ function columns(key) {
   const axis = MONTHS.map((m, i) => {
     const [name, y] = m.split(" ");
     const mi = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"].indexOf(name);
-    return `<span>${i % 3 === 0 ? RU_MON[mi] + " " + y.slice(2) : ""}</span>`;
+    return `<span>${i % 4 === 0 ? RU_MON[mi] + " " + y.slice(2) : ""}</span>`;
   }).join("");
   return `<div class="cols-wrap"><div class="cols">${cols}</div><div class="axis">${axis}</div></div>`;
 }
